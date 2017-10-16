@@ -1,0 +1,20 @@
+{
+  "name": "github-init",
+  "version": "1.0.0",
+  "description": "Command line tool to create repo on github.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Rabin Gaire",
+  "license": "MIT",
+  "bin": {
+    "github": "./index.js"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "chalk": "^2.1.0",
+    "commander": "^2.11.0",
+    "inquirer": "^3.3.0"
+  }
+}
