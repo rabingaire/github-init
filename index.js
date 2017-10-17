@@ -66,7 +66,7 @@ inquirer.prompt(parameter).then(function (answers) {
     headers: headers,
     data: data
   }).then(function(response) {
-    var link = response.ssh_url;
+    var link = response.data.ssh_url;
     console.log(chalk.bold.cyan('Repo Created, SSH URL is: ') + link);
   })
   .catch(function (error) {
@@ -77,6 +77,5 @@ inquirer.prompt(parameter).then(function (answers) {
       errorMessage = error.message;
     }
     console.log(chalk.red(errorMessage));
-    process.exit(1);
   });
 });
