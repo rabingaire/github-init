@@ -5,11 +5,11 @@ const inquirer = require('inquirer');
 const axios = require('axios');
 const chalk = require('chalk');
 
-var headers = {
+const headers = {
   'Authorization': `token ${TOKEN}`
 };
 
-var parameter = [
+const parameter = [
   {
     type: 'input',
     name: 'name',
@@ -66,16 +66,11 @@ inquirer.prompt(parameter).then(function (answers) {
     headers: headers,
     data: data
   }).then(function(response) {
-    var link = response.data.ssh_url;
+    const link = response.data.ssh_url;
     console.log(chalk.bold.cyan('Repo Created, SSH URL is: ') + link);
   })
   .catch(function (error) {
-    var errorMessage;
-    if(error.message) {
-      errorMessage = "Authentication failed!";
-    } else {
-      errorMessage = error.message;
-    }
+    const errorMessage = error.message;
     console.log(chalk.red(errorMessage));
   });
 });
