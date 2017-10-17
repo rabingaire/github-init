@@ -2,6 +2,8 @@
 
 Command Line tool to create repo on github.
 
+![github-init][github.gif]
+
 ### Prerequisites
 
 Need Node.js to be installed on computer.
