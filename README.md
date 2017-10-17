@@ -2,7 +2,7 @@
 
 Command Line tool to create repo on github.
 
-![github-init][github.gif]
+![github-init](github.gif)
 
 ### Prerequisites
 
