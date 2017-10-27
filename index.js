@@ -10,7 +10,7 @@ const dns = require('dns');
 
 dns.lookup('github.com', err => {
     if (err) {
-        logUpdate(`\n${chalk.red.bold(' ✘')}${chalk.dim('  Can\'t create the repository. Check your inetrnet connection!\n')}`);
+        logUpdate(`\n${chalk.red.bold(' ✘')}${chalk.dim('  Can\'t create the repository. Check your internet connection!\n')}`);
         process.exit(1);
     } else {
         const headers = {
