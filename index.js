@@ -4,73 +4,78 @@ const TOKEN = require('./token');
 const inquirer = require('inquirer');
 const axios = require('axios');
 const chalk = require('chalk');
+const ora = require('ora');
+const logUpdate = require('log-update');
+const dns = require('dns');
 
-const headers = {
-  'Authorization': `token ${TOKEN}`
-};
+dns.lookup('github.com', err => {
+    if (err) {
+        logUpdate(`\n${chalk.red.bold(' ✘')}${chalk.dim('  Can\'t create the repository. Check your inetrnet connection!\n')}`);
+        process.exit(1);
+    } else {
+        const headers = {
+            'Authorization': `token ${TOKEN}`
+        };
 
-const parameter = [
-  {
-    type: 'input',
-    name: 'name',
-    message: 'Repository name: '
-  },
-  {
-    type: 'input',
-    name: 'description',
-    message: 'Description: '
-  },
-  {
-    type: 'list',
-    name: 'auto_init',
-    message: 'Initialize Readme?',
-    choices: [
-      "Yes",
-      "No",
-    ]
-  },
-  {
-    type: 'list',
-    name: 'private',
-    message: 'Make Repository Private?',
-    choices: [
-      "Yes",
-      "No",
-    ]
-  },
-]
+        const parameter = [{
+            type: 'input',
+            name: 'name',
+            message: 'Repository name: '
+        }, {
+            type: 'input',
+            name: 'description',
+            message: 'Description: '
+        }, {
+            type: 'rawlist',
+            name: 'auto_init',
+            message: 'Initialize Readme?',
+            choices: [
+                "Yes",
+                "No",
+            ]
+        }, {
+            type: 'list',
+            name: 'private',
+            message: 'Make Repository Private?',
+            choices: [
+                "Yes",
+                "No",
+            ]
+        }, ]
 
-inquirer.prompt(parameter).then(function (answers) {
-  var data = {
-    name: answers.name,
-    description: answers.description,
-    gitignore_template: "nanoc"
-  };
+        inquirer.prompt(parameter).then(function(answers) {
+            var data = {
+                name: answers.name,
+                description: answers.description,
+                gitignore_template: "nanoc"
+            };
 
-  if(answers.auto_init === 'Yes') {
-    data.auto_init = true;
-  } else {
-    data.auto_init = false;
-  }
+            if (answers.auto_init === 'Yes') {
+                data.auto_init = true;
+            } else {
+                data.auto_init = false;
+            }
 
-  if(answers.private === 'Yes') {
-    data.private = true;
-  } else {
-    data.private = false;
-  }
+            if (answers.private === 'Yes') {
+                data.private = true;
+            } else {
+                data.private = false;
+            }
 
-  axios({
-    method:'post',
-    url:'/user/repos',
-    baseURL: 'https://api.github.com',
-    headers: headers,
-    data: data
-  }).then(function(response) {
-    const link = response.data.ssh_url;
-    console.log(chalk.bold.cyan('Repo Created, SSH URL is: ') + link);
-  })
-  .catch(function (error) {
-    const errorMessage = error.message;
-    console.log(chalk.red(errorMessage));
-  });
-});
+            axios({
+                    method: 'post',
+                    url: '/user/repos',
+                    baseURL: 'https://api.github.com',
+                    headers: headers,
+                    data: data
+                }).then(function(response) {
+                    const link = response.data.ssh_url;
+                    console.log(chalk.bold.cyan('Repo Created, SSH URL is: ') + link);
+                })
+                .catch(function(error) {
+                    const errorMessage = error.message;
+                    console.log(chalk.red(errorMessage));
+                });
+        });
+    }
+})
