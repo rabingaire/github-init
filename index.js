@@ -50,17 +50,8 @@ dns.lookup('github.com', err => {
                 gitignore_template: "nanoc"
             };
 
-            if (answers.auto_init === 'Yes') {
-                data.auto_init = true;
-            } else {
-                data.auto_init = false;
-            }
-
-            if (answers.private === 'Yes') {
-                data.private = true;
-            } else {
-                data.private = false;
-            }
+            data.auto_init = answers.auto_init === 'Yes';
+            data.private = answers.private === 'Yes';
 
             axios({
                     method: 'post',
