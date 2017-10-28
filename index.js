@@ -8,6 +8,8 @@ const ora = require('ora');
 const logUpdate = require('log-update');
 const dns = require('dns');
 
+const lang = require('../lang/default')
+
 dns.lookup('github.com', err => {
     if (err) {
         logUpdate(`\n${chalk.red.bold(' ✘')}${chalk.dim('  Can\'t create the repository. Check your internet connection!\n')}`);
@@ -20,15 +22,15 @@ dns.lookup('github.com', err => {
         const parameter = [{
             type: 'input',
             name: 'name',
-            message: 'Repository name: '
+            message: lang.repoName
         }, {
             type: 'input',
             name: 'description',
-            message: 'Description: '
+            message: lang.repoDesciption
         }, {
             type: 'rawlist',
             name: 'auto_init',
-            message: 'Initialize Readme?',
+            message: lang.repoReadme,
             choices: [
                 "Yes",
                 "No",
@@ -36,7 +38,7 @@ dns.lookup('github.com', err => {
         }, {
             type: 'list',
             name: 'private',
-            message: 'Make Repository Private?',
+            message: lang.repoMakePrivate,
             choices: [
                 "Yes",
                 "No",
