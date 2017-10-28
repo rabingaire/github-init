@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-const TOKEN = require('./token');
-const inquirer = require('inquirer');
 const axios = require('axios');
 const chalk = require('chalk');
-const ora = require('ora');
-const logUpdate = require('log-update');
 const dns = require('dns');
+const inquirer = require('inquirer');
+const lang = require('./lang/default')
+const logUpdate = require('log-update');
+const ora = require('ora');
+const TOKEN = require('./token');
 
-const lang = require('../lang/default')
 
 dns.lookup('github.com', err => {
     if (err) {
@@ -28,7 +28,7 @@ dns.lookup('github.com', err => {
             name: 'description',
             message: lang.repoDesciption
         }, {
-            type: 'rawlist',
+            type: 'list',
             name: 'auto_init',
             message: lang.repoReadme,
             choices: [
