@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+//
+// index.js
+//
+// Copyright (c) 2017 Rabin Gaire <rabingaire20@gmail.com>
+//
+
 const axios = require('axios');
 const chalk = require('chalk');
 const dns = require('dns');
