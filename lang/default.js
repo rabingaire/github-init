@@ -1,7 +1,7 @@
 const lang = {
   repoName: 'Repository name: ',
   repoDesciption: 'Description: ',
-  repoRedme: 'Initialize Readme? '
+  repoReadme: 'Initialize Readme? ',
   repoMakePrivate: 'Make Repository private?'
 };
 
