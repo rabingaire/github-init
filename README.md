@@ -8,6 +8,12 @@ Command Line tool to create repo on github.
 
 Need Node.js to be installed on computer.
 
+Install [dns](https://github.com/hbouvier/dns) npm package on your computer.
+
+```
+sudo npm install -g dns
+```
+
 ### Installing
 
 Clone the repo
