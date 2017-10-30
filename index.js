@@ -8,7 +8,6 @@ const lang = require('./lang/default')
 const logUpdate = require('log-update');
 const ora = require('ora');
 const execa = require('execa');
-const pAny = require('p-any');
 const TOKEN = require('./token');
 
 const spinner = ora();
