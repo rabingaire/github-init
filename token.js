@@ -1,3 +1,9 @@
-const TOKEN = "09d0e6805c610274ab49431a071f66ca2edb647b";
+//
+// token.js
+//
+// Copyright (c) 2017 Rabin Gaire <rabingaire20@gmail.com>
+//
+
+const TOKEN = "";  // Paste your token here 
 
 module.exports = TOKEN;
