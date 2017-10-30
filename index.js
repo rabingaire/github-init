@@ -16,6 +16,8 @@ const ora = require('ora');
 const TOKEN = require('./token');
 
 
+const lang = require('../lang/default')
+
 dns.lookup('github.com', err => {
     if (err) {
         logUpdate(`\n${chalk.red.bold(' ✘')}${chalk.dim('  Can\'t create the repository. Check your internet connection!\n')}`);
@@ -24,6 +26,11 @@ dns.lookup('github.com', err => {
         const headers = {
             'Authorization': `token ${TOKEN}`
         };
+
+        const defaultChoises: [
+          "Yes",
+          "No"
+        ];
 
         const parameter = [{
             type: 'input',
@@ -37,18 +44,12 @@ dns.lookup('github.com', err => {
             type: 'list',
             name: 'auto_init',
             message: lang.repoReadme,
-            choices: [
-                "Yes",
-                "No",
-            ]
+            choices: defaultChoises
         }, {
             type: 'list',
             name: 'private',
             message: lang.repoMakePrivate,
-            choices: [
-                "Yes",
-                "No",
-            ]
+            choices: defaultChoises
         }, ]
 
         inquirer.prompt(parameter).then(function(answers) {
