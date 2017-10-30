@@ -19,6 +19,11 @@ dns.lookup('github.com', err => {
             'Authorization': `token ${TOKEN}`
         };
 
+        const defaultChoises: [
+          "Yes",
+          "No"
+        ];
+
         const parameter = [{
             type: 'input',
             name: 'name',
@@ -31,18 +36,12 @@ dns.lookup('github.com', err => {
             type: 'rawlist',
             name: 'auto_init',
             message: lang.repoReadme,
-            choices: [
-                "Yes",
-                "No",
-            ]
+            choices: defaultChoises
         }, {
             type: 'list',
             name: 'private',
             message: lang.repoMakePrivate,
-            choices: [
-                "Yes",
-                "No",
-            ]
+            choices: defaultChoises
         }, ]
 
         inquirer.prompt(parameter).then(function(answers) {
