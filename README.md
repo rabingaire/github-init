@@ -5,7 +5,7 @@
 ## Install
 
 ```
-$ [sudo] npm install -g github
+$ [sudo] npm install -g init-github
 ```
 
 ## Preview
