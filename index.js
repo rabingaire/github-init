@@ -8,6 +8,7 @@ const inquirer = require('inquirer');
 const lang = require('./lang/default')
 const logUpdate = require('log-update');
 const ora = require('ora');
+const execa = require('execa');
 const TOKEN = require('./token');
 
 const spinner = ora();
@@ -50,7 +51,11 @@ dns.lookup('github.com', err => {
         }, ]
 
         inquirer.prompt(parameter).then(answers => {
+<<<<<<< HEAD
+            var data = {
+=======
             let data = {
+>>>>>>> 0214d838250cbcaf193db17463935268ce6eb023
                 name: answers.name,
                 description: answers.description,
                 gitignore_template: "nanoc"
