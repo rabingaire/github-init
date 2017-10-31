@@ -1,11 +1,5 @@
 #!/usr/bin/env node
 
-//
-// index.js
-//
-// Copyright (c) 2017 Rabin Gaire <rabingaire20@gmail.com>
-//
-
 const axios = require('axios');
 const chalk = require('chalk');
 const dns = require('dns');
@@ -13,8 +7,10 @@ const inquirer = require('inquirer');
 const lang = require('./lang/default')
 const logUpdate = require('log-update');
 const ora = require('ora');
+const execa = require('execa');
 const TOKEN = require('./token');
 
+const spinner = ora();
 
 dns.lookup('github.com', err => {
     if (err) {
@@ -24,6 +20,8 @@ dns.lookup('github.com', err => {
         const headers = {
             'Authorization': `token ${TOKEN}`
         };
+
+        logUpdate();
 
         const parameter = [{
             type: 'input',
@@ -51,7 +49,7 @@ dns.lookup('github.com', err => {
             ]
         }, ]
 
-        inquirer.prompt(parameter).then(function(answers) {
+        inquirer.prompt(parameter).then(answers => {
             var data = {
                 name: answers.name,
                 description: answers.description,
@@ -67,13 +65,22 @@ dns.lookup('github.com', err => {
                     baseURL: 'https://api.github.com',
                     headers: headers,
                     data: data
-                }).then(function(response) {
+                }).then(response => {
                     const link = response.data.ssh_url;
-                    console.log(chalk.bold.cyan('Repo Created, SSH URL is: ') + link);
+                    spinner.text = ' Cloning';
+                    logUpdate();
+                    spinner.start();
+                    execa('git', ['clone', `${link}`]).then(res => {
+                        logUpdate(`\n ${chalk.blue.bold('✓')} Done 
+
+ ${chalk.blue.bold('✓')} Cloned in ~ ${process.cwd()}/${answers.name}\n`);
+                        spinner.stop();
+                    })
+
                 })
-                .catch(function(error) {
+                .catch(error => {
                     const errorMessage = error.message;
-                    console.log(chalk.red(errorMessage));
+                    console.log(`\n${chalk.red('✘')} Could not create the repository ${chalk.dim('[Unprocessable Entity]')}\n`);
                 });
         });
     }
