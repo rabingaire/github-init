@@ -3,11 +3,11 @@
 const axios = require('axios');
 const chalk = require('chalk');
 const dns = require('dns');
+const execa = require('execa');
 const inquirer = require('inquirer');
 const lang = require('./lang/default')
 const logUpdate = require('log-update');
 const ora = require('ora');
-const execa = require('execa');
 const TOKEN = require('./token');
 
 const spinner = ora();
@@ -50,7 +50,7 @@ dns.lookup('github.com', err => {
         }, ]
 
         inquirer.prompt(parameter).then(answers => {
-            var data = {
+            let data = {
                 name: answers.name,
                 description: answers.description,
                 gitignore_template: "nanoc"
