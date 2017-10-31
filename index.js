@@ -3,6 +3,7 @@
 const axios = require('axios');
 const chalk = require('chalk');
 const dns = require('dns');
+const execa = require('execa');
 const inquirer = require('inquirer');
 const lang = require('./lang/default')
 const logUpdate = require('log-update');
@@ -50,7 +51,11 @@ dns.lookup('github.com', err => {
         }, ]
 
         inquirer.prompt(parameter).then(answers => {
+<<<<<<< HEAD
             var data = {
+=======
+            let data = {
+>>>>>>> 0214d838250cbcaf193db17463935268ce6eb023
                 name: answers.name,
                 description: answers.description,
                 gitignore_template: "nanoc"
