@@ -1,53 +1,43 @@
 # github-init
 
-Command Line tool to create repo on github.
+> Command Line tool to create repository on GitHub
 
-![github-init](github.gif)
-
-### Prerequisites
-
-Need Node.js to be installed on computer.
-
-Install [dns](https://github.com/hbouvier/dns) npm package on your computer.
+## Install
 
 ```
-sudo npm install -g dns
+$ [sudo] npm install -g github
 ```
 
-### Installing
+## Preview
 
-Clone the repo
+<p align="center">
+<img src="https://raw.githubusercontent.com/rabingaire/github-init/master/github.gif">
+</p>
 
-Open terminal
-
-```
-cd github-int
-```
-
-Now install all the required packages by
+## Usage 
 
 ```
-yarn install 
+ $ github
 ```
 
-or
+## Setup
 
-```
-npm install
-```
+This tool requires auth tokens to create repositories on Github. You'll need to follow the given steps in order to use this tool.
 
-Now you will need to get the Personal access token from Github account to get that you need to go to this [page](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/).
+- Generate [Personal Access Tokens](https://github.com/settings/tokens/new)
 
-After generating the access token copy and paste it to the token.js file.
+- Run `$ github` and hit `ctrl + c`
 
-Install it globally to your machine by running 
+- Now, go to your `home directory` which is basically `/home/username` and hit `ctrl + h` to find the hidden folders
 
-```
-sudo npm -g install
-``` 
+- Search for `.repogit` folder
 
-type `github` to run the tool.
+- Open the `token.json` file insdie the `.repogit` folder
+
+- Paste your `personal access token` and save the file.
+
+- Run `$ github` again to successfully create repositories
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT &copy; [Rabin Gaire](http://rabingaire.com.np/)
