@@ -93,6 +93,7 @@ dns.lookup('github.com', err => {
 
 				data.auto_init = answers.auto_init === 'Yes';
 				data.private = answers.private === 'Yes';
+				const clone = answers.clone === 'Yes';
 
 				axios({
 					method: 'post',
@@ -102,7 +103,7 @@ dns.lookup('github.com', err => {
 					data: data
 				}).then(response => {
 					const link = response.data.ssh_url;
-					if(answers.clone) {
+					if(clone) {
 						spinner.text = ' Cloning';
 						logUpdate();
 						spinner.start();
