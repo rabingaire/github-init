@@ -74,6 +74,14 @@ dns.lookup('github.com', err => {
 					'Yes',
 					'No'
 				]
+			}, {
+				type: 'list',
+				name: 'clone',
+				message: lang.repoClone,
+				choices: [
+					'Yes',
+					'No'
+				]
 			}];
 
 			inquirer.prompt(parameter).then(answers => {
@@ -94,13 +102,17 @@ dns.lookup('github.com', err => {
 					data: data
 				}).then(response => {
 					const link = response.data.ssh_url;
-					spinner.text = ' Cloning';
-					logUpdate();
-					spinner.start();
-					execa('git', ['clone', `${link}`]).then(() => {
-						logUpdate(`\n ${chalk.blue.bold('✓')} Done \n\n ${chalk.blue.bold('✓')} Cloned in ~ ${process.cwd()}/${answers.name}\n`);
-						spinner.stop();
-					});
+					if(answers.clone) {
+						spinner.text = ' Cloning';
+						logUpdate();
+						spinner.start();
+						execa('git', ['clone', `${link}`]).then(() => {
+							logUpdate(`\n ${chalk.blue.bold('✓')} Done \n\n ${chalk.blue.bold('✓')} Cloned in ~ ${process.cwd()}/${answers.name}\n`);
+							spinner.stop();
+						});
+					} else {
+						console.log(`\n ${chalk.blue.bold('✓')} Done \n\n ${chalk.blue.bold('✓')} Repo Created, SSH URL is: ${link}`);
+					}
 				}).catch(err => {
 					if (err) {
 						console.log(`\n${chalk.red('✘')} Could not create the repository ${chalk.dim('[Unprocessable Entity]')}\n`);
