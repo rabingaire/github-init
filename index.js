@@ -5,7 +5,7 @@
 const axios = require('axios');
 const chalk = require('chalk');
 const dns = require('dns');
-const execa = require('execa');
+const shell = require('shelljs');
 const fs = require('fs');
 const fse = require('fs-extra');
 const inquirer = require('inquirer');
@@ -87,8 +87,7 @@ dns.lookup('github.com', err => {
 			inquirer.prompt(parameter).then(answers => {
 				const data = {
 					name: answers.name,
-					description: answers.description,
-					gitignore_template: "nanoc"
+					description: answers.description
 				};
 
 				data.auto_init = answers.auto_init === 'Yes';
@@ -104,13 +103,12 @@ dns.lookup('github.com', err => {
 				}).then(response => {
 					const link = response.data.ssh_url;
 					if(clone) {
-						spinner.text = ' Cloning';
 						logUpdate();
 						spinner.start();
-						execa('git', ['clone', `${link}`]).then(() => {
+						if (shell.exec(`git clone ${link}`).code == 0) {
 							logUpdate(`\n ${chalk.blue.bold('✓')} Done \n\n ${chalk.blue.bold('✓')} Cloned in ~ ${process.cwd()}/${answers.name}\n`);
 							spinner.stop();
-						});
+						}
 					} else {
 						console.log(`\n ${chalk.blue.bold('✓')} Done \n\n ${chalk.blue.bold('✓')} Repo Created, SSH URL is: ${link}`);
 					}
